@@ -38,10 +38,10 @@ app
 // set mongoose to leverage promises
 mongoose.Promise = Promise;
 
-const dbURI = process.env.MONGODB_URI || "mongodb://localhost:27017/news";
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
-// Database configuration with mongoose
-mongoose.connect(dbURI);
+mongoose.connect(MONGODB_URI);
 
 const db = mongoose.connection;
 
@@ -60,3 +60,4 @@ db.once("open", function() {
 });
 
 module.exports = app;
+
